@@ -56,6 +56,7 @@ class TestSoftmax(unittest.TestCase):
         y_roll = numpy.rollaxis(y_expect, self.axis, y_expect.ndim)
         for i in numpy.ndindex(y_roll.shape[:-1]):
             y_roll[i] /= y_roll[i].sum()
+        y_roll = numpy.rollaxis(y_expect, y_expect.ndim-1, self.axis)
 
         testing.assert_allclose(
             y_expect, y.data, **self.check_forward_options)
